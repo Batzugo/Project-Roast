@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+      <title> Project Roast </title>
+
+        
+        <style>
+           .box {
+		       color: yellow;
+               width: 300px;
+               min-height: 150px;
+               border: 2px solid #333;
+               background-color: #ff4b2b;
+               padding: 20px;
+               margin: 20px auto;
+               box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+               font-family: Arial;
+               display: flex;
+               justify-content: center; 
+               align-items: center;     
+               text-align: center;
+               white-space: pre-wrap;
+               overflow-wrap: break-word;
+                }
+				
+				 body {
+                    margin: 0;
+                    height: 100vh;
+                    background: linear-gradient(to bottom right, #007bff, #ffffff);
+                    padding: 35px;
+                    font-family: Arial, sans-serif;
+                    color: #003366;
+                    font-size: 2rem;
+                       }
+            
+			
+			   .roast-btn {
+                         background: linear-gradient(to right, #ff416c, #ff4b2b);
+                         color: yellow;
+                         border: none;
+                         padding: 15px 30px;
+                         font-size: 18px;
+                         border-radius: 30px;
+                         cursor: pointer;
+                         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                         transition: all 0.3s ease;
+                        }
+                                 
+              .roast-btn:hover {
+                           transform: scale(1.05);
+                           box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+                             }
+							 
+							 
+			  .styled-select{
+                            background: linear-gradient(to right, #ff416c, #ff4b2b);
+                            background-color: white;
+                            color: yellow;
+                            border: none;
+                            padding: 15px 30px;
+                            font-size: 18px;
+                            border-radius: 30px;
+                            cursor: pointer;
+                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                            transition: all 0.3s ease;
+                            appearance: auto;
+                            webkit-appearance: none;
+                            moz-appearance: none;
+                             }
+							 
+				.styled-select option {
+                            background-color: #ff4b2b;
+                            padding: 10px;
+							color: yellow;
+                                      }			 
+      </style>
+    
+  </head>
+
+  <body style="font-family: Arial;">
+
+        <div class="box" id="roastmessage">
+        <p>The Roast Will Appear Here!</p>
+        </div>
+
+      <h2 style="border-bottom: 2px solid black;"> <b> Roast A Person!! </b> </h2>
+      <p> Select any button to roast yourself or your friends.</p>
+      <p> <b style="color: red; border-bottom: 1px solid black; border-bottom-color: red;">Warning!</b> Lower your volume.</p>
+
+      <audio id="soundPlayer"></audio>
+
+      <form>
+
+          <label for="options"> Choose One Person: </label>
+          <select id="options" class="styled-select">
+            <option value="Hamza"> Hamza </option>
+            <option value="Hamdan"> Hamdan </option>
+            <option value="Sultan"> Sultan </option>
+            <option value="Husnain"> Husnain </option>
+            <option value="Muqit"> Muqit </option>
+            <option value="Mujib"> Mujib </option>
+            <option value="Hasib"> Hasib </option>
+            <option value="Saad"> Saad </option>
+            <option value="Umer"> Umer </option>
+            <option value="Khizer"> Khizer </option>
+            <option value="Abdullah"> Abdullah </option>
+          </select> <br>
+           
+          <button class="roast-btn" onclick="checkoption()">Roast!</button>
+
+      </form>
+	  
+	  
+	  <br>
+	  <br>
+	  <br>
+    <p style="border-bottom: 2px solid black;">    <p>
+      <script>
+
+              const roasts = {
+                       Hamza: 
+                           `<p>Thinks he's a genius, works like a potato.Leaves more Minecraft plugins unfinished than completed projects.Fouls more in football than he scores.</p>`,
+                   
+                       Hamdan: `<p>Hamdan is so chill, he probably sleeps through his own roast.</p>`,
+
+                       Sultan: 
+                               `<p>Full-time Minecraft miner, part-time sunlight dodger.Plays football once, needs life support after 1 minute.</p>`,
+
+                       Husnain: `<p>Every joke he tells is a group silence moment.On the football field like a lost NPC with zero stats.</p>`,
+
+                       Muqit: `<p>Calls himself a programmer — writes 10 lines, takes a snack break.Builds Roblox games and websites no one asked for... including himself.</p>`,
+
+                       Mujib: `
+                             <p>Claims he's a game dev — spends more time watering virtual plants than coding.Roblox studio opened, 0 scripts written, 3 gardens grown.</p>`,
+
+                       Hasib: `<p>Hasib calls himself a chess prodigy, but he blunders so bad the pieces try to switch teams. His brain lags harder than Roblox on potato Wi-Fi.</p>`,
+
+                       Saad: `<p>Saad plays PUBG like he’s allergic to winning. The only thing he shoots is his own team's chances.</p>`,
+					   
+		       Umer: `<p>Umer calls himself a Minecraft hacker — bro can’t even hack his way out of the tutorial.Meanwhile, he's in Roblox chat begging for Robux like it’s a full-time job.</p>`,
+					   
+		       Khizer: `<p>Nobody’s seen Khizer in years. We're not even sure he’s real or just a myth passed down in group chats.</p>`,
+
+                       Abdullah: `<p>He calls himself a content creator, but the only thing he creates is secondhand embarrassment.</p>`,
+                             };
+
+                 const allsounds = {Sultan:`sultan.mp3`, Hamza:`hamza.mp3`, Hamdan:`hamdan.mp3`, Muqit:`muqit.mp3`, Mujib:`mujib.mp3`, Hasib:`hasib.mp3`, Husnain:`husnain.mp3`, Khizer:`Khizer.mp3`, Umer:`Umer.mp3`, Abdullah:`Abdullah.mp3`, };
+                              
+
+             function checkoption() {
+
+                event.preventDefault();
+                const option = document.getElementById("options");
+                const selectedoption = option.value;
+                const roastbox = document.getElementById("roastmessage");
+
+               if (roasts[selectedoption]) {
+                  roastbox.innerHTML = roasts[selectedoption];
+                       }
+
+               if (allsounds[selectedoption]) {
+                   soundPlayer.src = soundPlayer.src = allsounds[selectedoption];
+                   soundPlayer.play();
+                   }
+               }
+
+      </script>
+
+  </body>
+
+</html>
